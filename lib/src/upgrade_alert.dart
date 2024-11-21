@@ -330,11 +330,6 @@ class UpgradeAlertState extends State<UpgradeAlert> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(message),
-            Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Text(
-                    prompt ?? messages.message(UpgraderMessage.prompt) ?? '')),
-            if (notes != null) notes,
           ],
         )));
     final actions = <Widget>[
@@ -365,8 +360,10 @@ class UpgradeAlertState extends State<UpgradeAlert> {
     ];
 
     return cupertino
-        ? CupertinoAlertDialog(key: key, title: textTitle, actions: actions)
-        : AlertDialog(key: key, title: textTitle, actions: actions);
+        ? CupertinoAlertDialog(
+            key: key, title: textTitle, content: content, actions: actions)
+        : AlertDialog(
+            key: key, title: textTitle, content: content, actions: actions);
   }
 
   Widget button({
