@@ -32,6 +32,10 @@ class UpgradeAlert extends StatefulWidget {
     this.cupertinoButtonTextStyle,
     this.dialogKey,
     this.navigatorKey,
+    this.title,
+    this.body,
+    this.prompt,
+    this.buttonTitleUpdate,
     this.child,
   }) : upgrader = upgrader ?? Upgrader.sharedInstance;
 
@@ -77,6 +81,14 @@ class UpgradeAlert extends StatefulWidget {
 
   /// For use by the Router architecture as part of the RouterDelegate.
   final GlobalKey<NavigatorState>? navigatorKey;
+
+  final String? title;
+
+  final String? body;
+
+  final String? prompt;
+
+  final String? buttonTitleUpdate;
 
   /// The [child] contained by the widget.
   final Widget? child;
@@ -145,8 +157,8 @@ class UpgradeAlertState extends State<UpgradeAlert> {
           key: widget.dialogKey ?? const Key('upgrader_alert_dialog'),
           // ignore: use_build_context_synchronously
           context: context,
-          title: appMessages.message(UpgraderMessage.title),
-          message: widget.upgrader.body(appMessages),
+          title: widget.title ?? appMessages.message(UpgraderMessage.title),
+          message: widget.body ?? widget.upgrader.body(appMessages),
           releaseNotes:
               shouldDisplayReleaseNotes ? widget.upgrader.releaseNotes : null,
           barrierDismissible: widget.barrierDismissible,
@@ -250,6 +262,8 @@ class UpgradeAlertState extends State<UpgradeAlert> {
             context,
             widget.dialogStyle == UpgradeDialogStyle.cupertino,
             messages,
+            widget.buttonTitleUpdate,
+            widget.prompt,
           ),
         );
       },
@@ -274,13 +288,16 @@ class UpgradeAlertState extends State<UpgradeAlert> {
   }
 
   Widget alertDialog(
-      Key? key,
-      String title,
-      String message,
-      String? releaseNotes,
-      BuildContext context,
-      bool cupertino,
-      UpgraderMessages messages) {
+    Key? key,
+    String title,
+    String message,
+    String? releaseNotes,
+    BuildContext context,
+    bool cupertino,
+    UpgraderMessages messages,
+    String? prompt,
+    String? buttonTitleUpdate,
+  ) {
     // If installed version is below minimum app version, or is a critical update,
     // disable ignore and later buttons.
     final isBlocked = widget.upgrader.blocked();
@@ -315,7 +332,8 @@ class UpgradeAlertState extends State<UpgradeAlert> {
             Text(message),
             Padding(
                 padding: const EdgeInsets.only(top: 15.0),
-                child: Text(messages.message(UpgraderMessage.prompt) ?? '')),
+                child: Text(
+                    prompt ?? messages.message(UpgraderMessage.prompt) ?? '')),
             if (notes != null) notes,
           ],
         )));
@@ -338,7 +356,8 @@ class UpgradeAlertState extends State<UpgradeAlert> {
         ),
       button(
         cupertino: cupertino,
-        text: messages.message(UpgraderMessage.buttonTitleUpdate),
+        text: buttonTitleUpdate ??
+            messages.message(UpgraderMessage.buttonTitleUpdate),
         context: context,
         onPressed: () => onUserUpdated(context, !widget.upgrader.blocked()),
         isDefaultAction: true,

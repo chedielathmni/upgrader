@@ -137,6 +137,7 @@ class UpgraderMessages {
         message =
             'May bagong bersyon ang {{appName}} na pwede nang magamit! Ang bersyong {{currentAppStoreVersion}} ay pwede nang magamit. Ikaw ay kasalukuyang gumagamit ng bersyong {{currentInstalledVersion}}.';
         break;
+      //TODOUpdate
       case 'fr':
         message =
             'Une nouvelle version de {{appName}} est disponible ! La version {{currentAppStoreVersion}} est maintenant disponible, vous avez la version {{currentInstalledVersion}}.';
@@ -523,7 +524,7 @@ class UpgraderMessages {
         message = 'I-UPDATE NA NGAYON';
         break;
       case 'fr':
-        message = 'MAINTENANT';
+        message = 'METTRE À JOUR';
         break;
       case 'de':
         message = 'AKTUALISIEREN';
@@ -608,7 +609,7 @@ class UpgraderMessages {
         break;
       case 'en':
       default:
-        message = 'UPDATE NOW';
+        message = 'UPDATE';
         break;
     }
     return message;
@@ -641,6 +642,7 @@ class UpgraderMessages {
       case 'fil':
         message = 'Gusto mo bang i-update ito ngayon?';
         break;
+      //TODOUpdate
       case 'fr':
         message = 'Voulez-vous mettre à jour maintenant ?';
         break;
@@ -840,6 +842,7 @@ class UpgraderMessages {
       case 'fil':
         message = 'I-update ang app?';
         break;
+      // TODOUpdate
       case 'fr':
         message = 'Mettre à jour l\'application ?';
         break;
