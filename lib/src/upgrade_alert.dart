@@ -262,8 +262,8 @@ class UpgradeAlertState extends State<UpgradeAlert> {
             context,
             widget.dialogStyle == UpgradeDialogStyle.cupertino,
             messages,
-            widget.buttonTitleUpdate,
             widget.prompt,
+            widget.buttonTitleUpdate,
           ),
         );
       },
