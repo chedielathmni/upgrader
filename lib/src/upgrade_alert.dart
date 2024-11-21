@@ -365,10 +365,8 @@ class UpgradeAlertState extends State<UpgradeAlert> {
     ];
 
     return cupertino
-        ? CupertinoAlertDialog(
-            key: key, title: textTitle, content: content, actions: actions)
-        : AlertDialog(
-            key: key, title: textTitle, content: content, actions: actions);
+        ? CupertinoAlertDialog(key: key, title: textTitle, actions: actions)
+        : AlertDialog(key: key, title: textTitle, actions: actions);
   }
 
   Widget button({
